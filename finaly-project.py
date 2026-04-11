@@ -4,11 +4,16 @@ import math
 print('\033c')
 print('---------------------------------------------------------')
 
+"""pagga"""
+print('\t░█▀▀░█░░░█▀▀░█▀▀░▀█▀░█▀▄░█▀█░█▀▀░█▀█░█░░░█▀▀')
+print('\t░█▀▀░█░░░█▀▀░█░░░░█░░█▀▄░█░█░█░░░█▀█░█░░░█░░')
+print('\t░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀')
+
 print('\t welcome to the finally project', end="", flush=True)
 time.sleep(2)
 
 print('\r' + ' ' * 50, end="")
-print('\r\t\t Calcular consumo de electricidad de maquinas')
+print('\r\tCalcular consumo de electricidad de maquinas')
 
 print('\n---------------------------------------------------------')
 
@@ -22,7 +27,7 @@ respuesta = 'si'
 
 while respuesta == 'si':
 
-    print('\t Escoja una opcion:')
+    print('\t\t Escoja una opcion:')
     print('\t ☆.- calcular la electricidad gastada')
     print('\t ☆.- calcular la corriente electrica')
     print('\t ☆.- calcular la potencia electrica')
@@ -41,68 +46,72 @@ while respuesta == 'si':
 
             print('\t cargando.....', end="", flush=True)
             time.sleep(1)
+            print('\r' + ' ' * 50, end="")
 
-            print('\r\t\t calcular la electricidad gastada de maquinaria')
+            print('\r\t calcular la electricidad gastada de maquinaria')
 
-            print('\n--------------------------------------')
-            print('¿Qué lapso de tiempo le gustaría?')
+            print('\n---------------------------------------------------------')
+            print('\t¿Qué lapso de tiempo le gustaría?')
             print('\t ☆.- consumo por horas')
             print('\t ☆.- consumo electrico diario')
             print('\t ☆.- consumo mensual')
 
-            op = input('Ingrese una opcion: ').lower()
+            op = input('\tIngrese una opcion: ').lower()
 
             if op in ['1', 'horas', 'consumo por horas']:
-                potencia = float(input('Ingrese la potencia en watts: '))
-                horas = int(input('Ingrese las horas: '))
+                potencia = float(input('\tIngrese la potencia en watts: '))
+                horas = int(input('\tIngrese las horas: '))
                 energia = (potencia / 1000) * horas
-                print(f'La energia consumida es de {energia} kWh')
+                print(f'\tLa energia consumida es de {energia} kWh')
 
             elif op in ['2', 'diario']:
-                potencia = float(input('Ingrese la potencia en watts: '))
+                potencia = float(input('\tIngrese la potencia en watts: '))
                 energia = (potencia / 1000) * 24
-                print(f'La energia diaria es de {energia} kWh')
+                print(f'\tLa energia diaria es de {energia} kWh')
 
             elif op in ['3', 'mensual']:
-                potencia = float(input('Ingrese la potencia en watts: '))
+                potencia = float(input('\tIngrese la potencia en watts: '))
                 energia = (potencia / 1000) * 720
-                print(f'La energia mensual es de {energia} kWh')
+                print(f'\tLa energia mensual es de {energia} kWh')
 
             else:
-                print('Opcion no valida')
+                print('\t\tOpcion no valida')
 
         case 'calcular la corriente electrica' | 'corriente electrica' | '2' | 'corriente':
             cont_corriente += 1
 
             print('\t cargando.....')
             time.sleep(1)
+            print('\r' + ' ' * 50, end="")
 
-            voltaje = float(input("Ingresa el voltaje (V): "))
-            resistencia = float(input("Ingresa la resistencia (Ω): "))
+            voltaje = float(input("\tIngresa el voltaje (V): "))
+            resistencia = float(input("\tIngresa la resistencia (Ω): "))
 
             if resistencia != 0:
                 corriente = voltaje / resistencia
-                print(f'La corriente electrica es de {corriente} A')
+                print(f'\tLa corriente electrica es de {corriente} A')
             else:
-                print("No se puede dividir entre 0")
+                print("\t No se puede dividir entre 0")
 
         case 'calcular la potencia electrica' | '3' | 'potencia':
             cont_potencia += 1
 
             print('\t cargando.....')
             time.sleep(1)
+            print('\r' + ' ' * 50, end="")
 
-            voltaje = float(input("Ingresa el voltaje (V): "))
-            corriente = float(input("Ingresa la corriente (A): "))
+            voltaje = float(input("\tIngresa el voltaje (V): "))
+            corriente = float(input("\tIngresa la corriente (A): "))
 
             potencia = voltaje * corriente
-            print(f'La potencia electrica es de {potencia} W')
+            print(f'\tLa potencia electrica es de {potencia} W')
 
         case 'calcular el magnetismo' | '4' | 'magnetismo':
             cont_magnetismo += 1
 
             print('\t cargando.....')
             time.sleep(1)
+            print('\r' + ' ' * 50, end="")
 
             corriente = float(input("Ingrese la corriente (A): "))
             distancia = float(input("Ingrese la distancia (m): "))
@@ -118,12 +127,12 @@ while respuesta == 'si':
         case _:
             print("Opcion no valida")
 
-    print('\n--------------------------------------')
+    print('\n---------------------------------------------------------')
 
-    respuesta = input('¿Desea realizar otra operacion? (si/no): ').lower()
+    respuesta = input('\t¿Desea realizar otra operacion? (si/no): ').lower()
 
     while respuesta not in ['si', 'no']:
-        respuesta = input("Por favor escribe 'si' o 'no': ").lower()
+        respuesta = input("\tPor favor escribe 'si' o 'no': ").lower()
 
     print('\033c')
 
