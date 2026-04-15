@@ -6,7 +6,7 @@ from rich.console import Console
 
 console = Console()
 
-def cargando(segundos=1, mensaje="Procesando..."):
+def cargando(segundos=0.5, mensaje="Procesando..."):
     with console.status(f"[white]{mensaje}", spinner="dots"):
         time.sleep(segundos)
 
@@ -17,7 +17,7 @@ print('\t[bold blue]░█▀▀░█░░░█▀▀░█░░░░█░
 print('\t[bold blue]░▀▀▀░▀▀▀░▀▀▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░▀▀▀')
 print('\t[blue]Welcome to the final project')
 
-time.sleep(1)
+time.sleep(2)
 
 print('\n[blue]Calcular consumo de electricidad de maquinas')
 print('[blue]---------------------------------------------------------')
@@ -45,12 +45,12 @@ while respuesta == 'si':
 
     match texto:
 
-        case '1' | 'electricidad' | 'electricidad gastada':
+        case '1' | 'electricidad' | 'electricidad gastada' | 'gastada':
             cont_electricidad += 1
 
             cargando()
 
-            print('\n[blue]\tCalculo de electricidad')
+            print('\n[blue]\t CALCULAR LA ELECTRICIDAD DE LA MAQUINA')
             print('[blue]---------------------------------------------------------')
 
             print('\t[white]☆.- Consumo por horas')
@@ -59,40 +59,94 @@ while respuesta == 'si':
 
             op = Prompt.ask("\tIngrese una opcion").lower()
 
-            
+            if op in ['1', 'horas', 'consumo por horas']:
+                print('\n[blue]\t CALCULAR ELECTRICIDAD DE LA MAQUINA POR HORAS')
+                try: potencia = float(input('\tIngrese la potencia en watts: '))
+                except ValueError:
+                    print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                    exit()
+                try:horas = int(input('\tIngrese las horas: '))
+                except ValueError:
+                    print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                    exit()
+                energia = (potencia / 1000) * horas
+                print(f'\tLa energia consumida es de {energia} kWh')
 
-        case '2' | 'corriente':
+            elif op in ['2', 'diario']:
+                print('\n[blue]\t CALCULAR ELECTRICIDAD DE LA MAQUINA POR UN DIA')
+                try: potencia = float(input('\tIngrese la potencia en watts: '))
+                except ValueError:
+                    print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                    exit()
+                energia = (potencia / 1000) * 24
+                print(f'\tLa energia diaria es de {energia} kWh')
+
+            elif op in ['3', 'mensual']:
+                print('\n[blue]\t CALCULAR ELECTRICIDAD GASTADA EN UN MES')
+                try: potencia = float(input('\tIngrese la potencia en watts: '))
+                except ValueError:
+                    print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                    exit()
+                energia = (potencia / 1000) * 720
+                print(f'\tLa energia mensual es de {energia} kWh')
+
+            else:
+                print('\t\tOpcion no valida')
+            
+        case '2' | 'corriente'| 'corrientes':
             cont_corriente += 1
 
             cargando()
+            print('\n[blue]\t CALCULAR CORRIENTE ELECTRICA DE LA MAQUINA')
 
-            voltaje = float(Prompt.ask("\tVoltaje (V)"))
-            resistencia = float(Prompt.ask("\tResistencia (Ω)"))
+            try: voltaje = float(Prompt.ask("\tVoltaje (V)"))
+            except ValueError:
+                print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                exit()
+            try: resistencia = float(Prompt.ask("\tResistencia (Ω)"))
+            except ValueError:
+                print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                exit()
 
             if resistencia != 0:
                 corriente = voltaje / resistencia
                 print(f'[bold green]\tCorriente: {corriente} A')
             else:
-                print('[bold red]\tNo se puede dividir entre 0')    
+                print('[bold red]\tNo se puede dividir entre 0') 
 
-        case '3' | 'potencia':
+        case '3' | 'potencia' | 'potencias':
             cont_potencia += 1
 
             cargando()
+            print('\n[blue]\t CALCULAR POTENCIA ELECTRICA')
 
-            voltaje = float(Prompt.ask("\tVoltaje (V)"))
-            corriente = float(Prompt.ask("\tCorriente (A)"))
+            try: voltaje = float(Prompt.ask("\tVoltaje (V)"))
+            except ValueError:
+                print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                exit()
 
+            try: corriente = float(Prompt.ask("\tCorriente (A)"))
+            except ValueError:
+                print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                exit()
             potencia = voltaje * corriente
             print(f'[bold green]\tPotencia: {potencia} W')
 
-        case '4' | 'magnetismo':
+        case '4' | 'magnetismo' | 'magnetismos':
             cont_magnetismo += 1
 
             cargando()
+            print('\n[blue]\t CALCULAR MAGNETISMO DE LA MAQUINA')
+            try: corriente = float(Prompt.ask("\tCorriente (A)"))
+            except ValueError:
+                print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                exit()
 
-            corriente = float(Prompt.ask("\tCorriente (A)"))
-            distancia = float(Prompt.ask("\tDistancia (m)"))
+            try: distancia = float(Prompt.ask("\tDistancia (m)"))
+            except ValueError:
+                print("[yellow][!][/yellow] Ingresa un dato de tipo numero!")
+                exit()
+
 
             mu0 = 4 * math.pi * 1e-7
 
@@ -110,7 +164,10 @@ while respuesta == 'si':
     respuesta = Prompt.ask("\t¿Desea otra operacion? (si/no)").lower()
 
     while respuesta not in ['si', 'no']:
-        respuesta = Prompt.ask("\tEscribe 'si' o 'no'").lower()
+        try:  respuesta = Prompt.ask("\tEscribe 'si' o 'no'").lower()
+        except ValueError:
+            print("[yellow][!][/yellow] Ingresa un dato valido!")
+            exit() 
 
     print('\033c')
 
